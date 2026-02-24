@@ -1,0 +1,22 @@
+{
+  "defaultSchema": "ga4_analytics",
+  "defaultDatabase": "crafty-booth-314409",
+  "vars": {
+    "ga4_dataset": "bigquery-public-data.ga4_obfuscated_sample_ecommerce"
+  },
+  "workflow": {
+    "rules": {
+      "bronze": {
+        "include": ["definitions.sql"]
+      },
+      "silver": {
+        "include": ["silver/*.sql"],
+        "depends": ["bronze"]
+      },
+      "gold": {
+        "include": ["gold/*.sql"],
+        "depends": ["silver"]
+      }
+    }
+  }
+}
