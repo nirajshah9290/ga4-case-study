@@ -1,0 +1,12 @@
+models:
+  - name: purchase_traffic_source_medium
+    description: "Gold layer: Monthly traffic source performance for purchases"
+    columns:
+      - name: month
+        description: "YYYY-MM format"
+      - name: traffic_source.medium
+        description: "Marketing channel (google/organic/facebook)"
+      - name: total_purchased_value_usd
+        description: "Sum of purchase revenue"
+      - name: total_purchases
+        description: "Count of purchase events"
