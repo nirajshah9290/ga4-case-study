@@ -1,8 +1,5 @@
 # GA4 Case Study - Dataform Pipeline
 This repository contains a Dataform project designed to process Google Analytics 4 (GA4) ecommerce data from a raw state into actionable business intelligence.
-## Data Lineage
-
-GA4 Raw Events (External) --> (Bronze - Append) events_bronze (90-day retention) --> (Silver - Filtered/Cleaned) purchase_traffic (View)--> (Gold - Aggregated)top_traffic_source_medium
 
 ## Layer Descriptions
 
