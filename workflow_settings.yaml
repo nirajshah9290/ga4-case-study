@@ -1,4 +1,4 @@
 defaultProject: crafty-booth-314409
 defaultDataset: ga4_reporting
 defaultLocation: US
-assertionSchema: ga4_assertions
+defaultAssertionDataset: ga4_assertions
