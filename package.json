@@ -1,0 +1,6 @@
+{
+    "name": "My First Project",
+    "dependencies": {
+        "@dataform/core": "2.9.0"
+    }
+}
