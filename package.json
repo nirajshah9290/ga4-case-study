@@ -1,0 +1,13 @@
+# In your git repo root (same level as dataform.json)
+{
+  "name": "ga4-dataform-workspace",
+  "version": "1.0.0",
+  "description": "GA4 Dataform Case Study - Merkle DACH",
+  "scripts": {
+    "compile": "dataform compile",
+    "run": "dataform run"
+  },
+  "devDependencies": {
+    "@dataform/core": "^0.5.0"
+  }
+}
