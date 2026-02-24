@@ -1,0 +1,20 @@
+config {
+  type: "table",
+  description: "Monthly aggregation of traffic source performance: Revenue and Volume."
+}
+
+SELECT
+  date_trunc(event_date, MONTH) AS report_month,
+  traffic_medium,
+  SUM(event_value_in_usd) AS total_revenue_usd,
+  SUM(items_count) AS total_items_purchased,
+  -- KPI: Average items per purchase (Total items / Total number of purchases)
+  SAFE_DIVIDE(SUM(items_count), COUNT(*)) AS avg_items_per_purchase,
+  COUNT(*) AS purchase_volume
+FROM
+  ${ref("purchase_traffic_source_medium")}
+GROUP BY
+  1, 2
+ORDER BY
+  report_month DESC, 
+  total_revenue_usd DESC
