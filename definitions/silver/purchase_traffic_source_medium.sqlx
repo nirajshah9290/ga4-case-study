@@ -1,0 +1,25 @@
+config {
+  type: "table",
+  description: "Cleaned purchase events with traffic source. Filtered out deleted data.",
+  columns: {
+    event_date: "Date of the purchase",
+    traffic_medium: "Medium of the traffic source",
+    user_pseudo_id: "User identifier",
+    ga_session_id: "Session identifier extracted from event_params",
+    event_value_in_usd: "Value of the purchase"
+  }
+}
+
+SELECT
+  parse_date('%Y%m%d', event_date) AS event_date,
+  traffic_source.medium AS traffic_medium,
+  user_pseudo_id,
+  (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') AS ga_session_id,
+  COALESCE(event_value_in_usd, 0) AS event_value_in_usd,
+  -- We include item count here to make Gold aggregation easier
+  (SELECT SUM(quantity) FROM UNNEST(items)) AS items_count
+FROM
+  ${ref("events_*")}
+WHERE
+  event_name = 'purchase'
+  AND traffic_source.medium != '(data deleted)'
