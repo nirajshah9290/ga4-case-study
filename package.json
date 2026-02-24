@@ -1,0 +1,6 @@
+{
+  "name": "ga4-dataform-case-study",
+  "dependencies": {
+    "@dataform/core": "0.3.0"
+  }
+}
