@@ -1,4 +1,3 @@
 defaultProject: crafty-booth-314409
 defaultDataset: ga4_reporting
 defaultLocation: US
-warehouse: bigquery
