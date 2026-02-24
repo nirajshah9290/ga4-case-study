@@ -1,27 +1,17 @@
-# GA4 Case Study - Dataform Pipeline
+GA4 Ecommerce Data Pipeline (Dataform Case Study)
+This repository contains a Dataform project designed to process Google Analytics 4 (GA4) ecommerce data from a raw state into actionable business intelligence.
 
-## Data Lineage
+🏗 Architecture: The Medallion Approach
+The project is structured into three distinct layers to ensure data quality and lineage:
 
-GA4 Raw Events (External)
-↓ (Bronze - Append)
-events_bronze (90-day retention)
-↓ (Silver - Filtered/Cleaned)
-purchase_traffic (View)
-↓ (Gold - Aggregated)
-top_traffic_source_medium (Partitioned Table)
+Bronze (Source): Direct declaration of the bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_* dataset. No transformations are performed here to maintain data auditability.
 
-## Layer Descriptions
+Silver (Cleaned/Denormalized): * Filters specifically for purchase events.
 
-**Bronze**: Raw GA4 events (90-day window, partitioned by event_date)
-**Silver**: Filtered purchases with traffic_source.medium (View)
-**Gold**: Monthly traffic source performance (partitioned by month)
+Excludes records where traffic_source.medium is marked as (data deleted).
 
-## Run Schedule
-- Daily: Bronze + Silver refresh
-- Daily: Gold full refresh (small dataset)
+Flattens nested fields like ga_session_id (from event_params) and calculates items_count (from the items array) to simplify downstream logic.
 
-## KPIs Delivered
-- Purchased value USD by traffic source
-- Purchase volume
-- Avg items/purchase
-- Conversion insights
+Gold (Reporting): * Aggregates data at a Monthly and Traffic Medium level.
+
+Calculates key performance indicators (KPIs) including total revenue, total volume, and average items per purchase.
